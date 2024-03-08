@@ -1,19 +1,21 @@
-from user_input_checks import UserInputChecks
+from utils.user_input_checks import UserInputChecks
 
 
 class CLIHandler:
     def __init__(self):
-        self.UserInputChecks = None
+        pass
 
     @staticmethod
-    def get_username(self) -> None:
+    def get_username() -> str:
         print("Welcome to Terminal Client API!")
         username: str = input("Please enter username: ")
 
-        self.UserInputChecks = UserInputChecks(username)
+        CLIHandler.UserInputChecks = UserInputChecks(username)
+
+        return username
 
     @staticmethod
-    def enter_password(self) -> str:
+    def enter_password() -> str:
         password: str = input("Enter Password: ")
 
         return password
@@ -21,7 +23,7 @@ class CLIHandler:
     @staticmethod
     def confirm_password(self):
         password: str = input("Please enter password: ")
-        password_check: bool = self.UserInputChecks.password_validation(password=password)
+        password_check: bool = UserInputChecks.password_validation(password=password)
 
         return password_check
 
@@ -33,7 +35,7 @@ class CLIHandler:
         print("Currently only Football is available.")
         user_input: str = input("Please enter Yes (Y) or No (N), if you understand: ")
 
-        user_input_check: bool = self.UserInputChecks.input_affirmation(input_value=user_input)
+        user_input_check: bool = UserInputChecks.input_affirmation(input_value=user_input)
         return user_input_check
 
     @staticmethod
