@@ -1,2 +1,4 @@
+from src.introducton import terminal_introduction
+
 if __name__ == '__main__':
-    print("Hello")
+    terminal_introduction()
