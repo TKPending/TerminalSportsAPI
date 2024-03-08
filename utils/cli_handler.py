@@ -13,6 +13,19 @@ class CLIHandler:
         self.UserInputChecks = UserInputChecks(username)
 
     @staticmethod
+    def enter_password(self) -> str:
+        password: str = input("Enter Password: ")
+
+        return password
+
+    @staticmethod
+    def confirm_password(self):
+        password: str = input("Please enter password: ")
+        password_check: bool = self.UserInputChecks.password_validation(password=password)
+
+        return password_check
+
+    @staticmethod
     def choose_sport(self) -> bool:
         if self.UserInputChecks is None:
             return False
@@ -24,5 +37,5 @@ class CLIHandler:
         return user_input_check
 
     @staticmethod
-    def football_redirction() -> None:
+    def football_redirection() -> None:
         return

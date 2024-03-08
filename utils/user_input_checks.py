@@ -1,4 +1,5 @@
 from typing import List
+import re
 
 
 class UserInputChecks:
@@ -14,3 +15,22 @@ class UserInputChecks:
             return True
 
         return False
+
+    @staticmethod
+    def password_validation(password: str) -> bool:
+        if len(password) < 8:
+            return False
+
+        if not re.search(r'[A-Z]', password):
+            return False
+
+        if not re.search(r'[!@#$%^&*(),.?":{}|<>]', password):
+            return False
+
+        if ' ' in password:
+            return False
+
+        if not re.search(r'\d', password):
+            return False
+
+        return True
