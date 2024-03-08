@@ -1,8 +1,8 @@
-from utils.cli_handler import  CLIHandler
+from utils.cli_handler import CLIHandler
+
 
 def main() -> None:
-
-    return
+    username: str = CLIHandler.get_username()
 
 
 if __name__ == '__main__':
