@@ -17,6 +17,16 @@ class UserInputChecks:
         return False
 
     @staticmethod
+    def username_validation(username: str) -> bool:
+        if len(username) < 3:
+            return False
+
+        if ' ' in username:
+            return False
+
+        return True
+
+    @staticmethod
     def password_validation(password: str) -> bool:
         if len(password) < 8:
             return False

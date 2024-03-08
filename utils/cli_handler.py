@@ -1,4 +1,5 @@
 from utils.user_input_checks import UserInputChecks
+from database.messages import ClientText
 
 
 class CLIHandler:
@@ -7,29 +8,51 @@ class CLIHandler:
 
     @staticmethod
     def get_username() -> str:
-        print("Welcome to Terminal Client API!")
-        username: str = input("Please enter username: ")
+        print(ClientText.INTRODUCTION["welcome"])
+        count: int = 0
 
-        CLIHandler.UserInputChecks = UserInputChecks(username)
+        while True:
+            if count >= 3:
+                return ""
 
-        return username
+            username: str = input(ClientText.INTRODUCTION["username"])
+            username_check: bool = UserInputChecks.username_validation(username)
 
-    @staticmethod
-    def enter_password() -> str:
-        password: str = input("Enter Password: ")
+            if username_check:
+                return username
 
-        return password
-
-    @staticmethod
-    def confirm_password(self):
-        password: str = input("Please enter password: ")
-        password_check: bool = UserInputChecks.password_validation(password=password)
-
-        return password_check
+            print(ClientText.WARNING["username"])
+            count += 1
 
     @staticmethod
-    def choose_sport(self) -> bool:
-        if self.UserInputChecks is None:
+    def enter_password(password_text: str, message: int) -> str:
+        count: int = 0
+
+        while True:
+            if count >= 3:
+                return ""
+
+            password: str = input(password_text)
+            password_check: bool = UserInputChecks.password_validation(password)
+
+            if password_check:
+                return password
+
+            print(ClientText.WARNING["password"] if message == 1 else ClientText.WARNING["confirm_password"])
+            count += 1
+
+    @staticmethod
+    def confirm_password(existing_password: str):
+        second_password: str = CLIHandler.enter_password(ClientText.INTRODUCTION["password"]["second"], message=2)
+
+        if existing_password != second_password:
+            return False
+
+        return True
+
+    @staticmethod
+    def choose_sport() -> bool:
+        if UserInputChecks is None:
             return False
 
         print("Currently only Football is available.")
