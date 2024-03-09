@@ -9,7 +9,7 @@ class AuthClient:
         response: Response = SupabaseRoutes.check_user(username)
 
         if response.success:
-            data = response.message[1]["username"]
+            data: any = response.message[1]["username"]
 
             if data == username:
                 return Response(success=True)
@@ -24,7 +24,7 @@ class AuthClient:
         response: Response = SupabaseRoutes.check_password(password)
 
         if response.success:
-            data = response.message[1]["password"]
+            data: any = response.message[1]["password"]
 
             if data == password:
                 return Response(success=True)

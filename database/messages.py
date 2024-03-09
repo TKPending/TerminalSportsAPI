@@ -14,6 +14,12 @@ class ClientText:
         },
     }
 
+    ENDPOINTS = {
+        "leagues": {
+            "football": "https://api-football-v1.p.rapidapi.com/v3/leagues"
+        }
+    }
+
     MENU = {
         "options": {
             "football": ["saved", "league", "teams", "settings"]

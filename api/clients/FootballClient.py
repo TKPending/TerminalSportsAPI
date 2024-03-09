@@ -1,6 +1,8 @@
 from utils import Response
 from database import ClientText
 from api.routes import SupabaseRoutes
+import requests
+from api import headers
 
 
 class FootballClient:
@@ -8,26 +10,16 @@ class FootballClient:
         self.username = username
         self.chosen_option = chosen_option
 
-    def handle_user(self):
-        if self.chosen_option == "saved":
-            return
-        elif self.chosen_option == "league":
-            return
-        elif self.chosen_option == "team":
-            return
-        elif self.chosen_option == "settings":
-            return
+    @staticmethod
+    def rapid_leagues():
+        response = requests.get(ClientText.ENDPOINTS["leagues"]["football"], headers=headers)
 
-        return
+        data = response.json()
+        print(data)
 
-    def saved_settings(self):
-        return
-
-    def league_information(self):
-        return
-
-    def team_information(self):
-        return
-
-    def settings(self):
-        return
+        # for leagues in data:=
+        #     league_id = leagues["league"]["id"]
+        #     league_name = leagues["league"]["name"]
+        #     league_country = leagues["country"]["name"]
+        #
+        #     print(f"ID: {league_id} - League: {league_name} - Country: {league_country}")

@@ -1,6 +1,6 @@
 from database import ClientText
 from utils import Response, ErrorHandler, SportsMenu
-from api.clients import FootballClient
+from src.sports.football import handle_user_choices
 
 
 def sport_options(username: str) -> None:
@@ -37,5 +37,5 @@ def choose_option() -> Response:
 
 def handle_menu_option(username: str, sport: str, menu_option: str) -> None:
     if sport == "football":
-        user = FootballClient(username, chosen_option=menu_option)
+        handle_user_choices(username, chosen_option=menu_option)
 
