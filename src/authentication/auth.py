@@ -50,6 +50,7 @@ def password_process(user_exists: Response) -> PasswordType:
 
 
 def account_creation(username: str, password: str):
+    # TODO: Improve password security. Encrypt and Decrypt
     account_creation_status: Response = AuthClient.create_user(username, password)
 
     if account_creation_status.success:

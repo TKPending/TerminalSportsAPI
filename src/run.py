@@ -7,3 +7,5 @@ def run() -> None:
     ErrorHandler.empty_string(username)
 
     authentication_flow(username)
+
+    print(f"\nWelcome {username}\n")
