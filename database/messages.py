@@ -5,17 +5,23 @@ class ClientText:
         "password": {
             "first": "Please enter password: ",
             "second": "Confirm Password: "
-        }
+        },
+        "signup": "\nCouldn't find user, please sign up\n",
+        "account_creation": {
+            "success": "\nYour account has been created!",
+            "failure": "\nFailure creating account. Try again!\n"
+        },
     }
 
     WARNING = {
         "username": "\nUsername must be more than 3 letters, and not include spaces \n",
         "password": "\nPassword must have a capital letter, special character, number, more than 3 letters "
                     "and not include spaces \n",
-        "confirm_password": "\nPassword doesn't match\n"
+        "confirm_password": "\nPassword doesn't match\n",
     }
 
     ERROR = {
         "empty_string": "\nERROR: Value entered was empty.",
-        "force_close": "\nERROR: Closing application\n"
+        "force_close": "\nERROR: Closing application\n",
+        "supabase_connection": "\nERROR: Problem connecting to DB\n"
     }
