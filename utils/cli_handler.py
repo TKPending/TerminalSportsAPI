@@ -61,7 +61,3 @@ class CLIHandler:
 
         user_input_check: bool = UserInputChecks.input_affirmation(input_value=user_input)
         return user_input_check
-
-    @staticmethod
-    def football_redirection() -> None:
-        return

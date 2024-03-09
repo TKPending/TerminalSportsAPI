@@ -14,6 +14,22 @@ class ClientText:
         },
     }
 
+    MENU = {
+        "options": {
+            "football": ["saved", "league", "teams", "settings"]
+        },
+        "home": {
+            "football": "\nMake A Choice\n\nSaved - League - Teams - Settings\n\n"
+        },
+        "failed_options": "\nFailed to choose a valid option\n"
+    }
+
+    SPORTS = {
+        "available_sports": "Current Available Sports: Football",
+        "choose_sport": "Choose a sport: ",
+        "failed_chosen": "\nFailed to pick a sport!\n"
+    }
+
     WARNING = {
         "username": "\nUsername must be more than 3 letters, and not include spaces \n",
         "password": "\nPassword must have a capital letter, special character, number, more than 3 letters "
