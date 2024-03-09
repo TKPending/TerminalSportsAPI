@@ -1,5 +1,6 @@
 from utils import CLIHandler, ErrorHandler
 from .authentication.auth import authentication_flow
+from .sports import sport_options
 
 
 def run() -> None:
@@ -9,3 +10,5 @@ def run() -> None:
     authentication_flow(username)
 
     print(f"\nWelcome {username}\n")
+
+    sport_options(username)
