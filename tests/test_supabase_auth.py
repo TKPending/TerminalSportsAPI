@@ -1,7 +1,6 @@
 import unittest
 from unittest.mock import patch
 from api.routes import SupabaseRoutes
-from utils import Response
 
 SUPABASE_PATH: str = 'database.supabase_utils.supabase'
 
