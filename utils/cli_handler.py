@@ -38,6 +38,7 @@ class CLIHandler:
             if password_check:
                 return password
 
+            print(ClientText.WARNING["invalid_password"])
             print(ClientText.WARNING["password"] if message == 1 else ClientText.WARNING["confirm_password"])
             count += 1
 

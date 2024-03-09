@@ -4,7 +4,8 @@ class ClientText:
         "username": "Please enter username: ",
         "password": {
             "first": "Please enter password: ",
-            "second": "Confirm Password: "
+            "second": "Confirm Password: ",
+            "incorrect": "Incorrect Password! Try again."
         },
         "signup": "\nCouldn't find user, please sign up\n",
         "account_creation": {
@@ -18,6 +19,7 @@ class ClientText:
         "password": "\nPassword must have a capital letter, special character, number, more than 3 letters "
                     "and not include spaces \n",
         "confirm_password": "\nPassword doesn't match\n",
+        "invalid_password": "\nIncorrect Password! Try Again\n"
     }
 
     ERROR = {

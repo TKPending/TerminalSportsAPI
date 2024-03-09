@@ -3,14 +3,26 @@ from api.clients import AuthClient
 from database import ClientText
 
 
+class PasswordType:
+    def __init__(self, stage: str = "", password: str = ""):
+        self.stage = stage
+        self.password = password
+
+
 def authentication_flow(username: str):
     user_exists: Response = AuthClient.check_user_exists(username)
 
-    password: str = account_signup(user_exists)
-    account_creation(username, password)
+    password: PasswordType = password_process(user_exists)
+
+    if password.stage == "signup":
+        account_creation(username, password.password)
+    elif password.stage == "failed":
+        ErrorHandler.default_exit("Failed Sign in / up Process")
+
+    return
 
 
-def account_signup(user_exists: Response) -> str:
+def password_process(user_exists: Response) -> PasswordType:
     if not user_exists.success:
         if user_exists.error_message:
             ErrorHandler.default_exit(user_exists.error_message)
@@ -20,11 +32,21 @@ def account_signup(user_exists: Response) -> str:
     password: str = CLIHandler.enter_password(ClientText.INTRODUCTION["password"]["first"], message=1)
     ErrorHandler.empty_string(password)
 
+    # New User
     if not user_exists.success:
         password_check: bool = CLIHandler.confirm_password(existing_password=password)
         ErrorHandler.false_return(password_check)
+        return PasswordType(stage="signup", password=password)
+    else:
+        # Existing User
+        password_check: Response = AuthClient.check_password(password)
 
-    return password
+        if password_check.success:
+            return PasswordType(stage="signin", password=password)
+        elif password_check.message:
+            return password_process(user_exists)
+
+        return PasswordType(stage="failed")
 
 
 def account_creation(username: str, password: str):
