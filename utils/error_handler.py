@@ -7,6 +7,11 @@ class ErrorHandler:
         pass
 
     @staticmethod
+    def default_exit(message: str) -> None:
+        print(message)
+        sys.exit()
+
+    @staticmethod
     def empty_string(value: str) -> None:
         if value == "":
             print(ClientText.ERROR["empty_string"])
