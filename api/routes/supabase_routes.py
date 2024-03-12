@@ -58,13 +58,19 @@ class SupabaseRoutes:
             print(f"Error: {e}")
             print(ClientText.SUPABASE["failed_call"])
 
-
     @staticmethod
-    def fetch_populate_teams(api_id: int, team_name: str):
+    def fetch_populate_teams(league_table: [{}]):
         try:
-            return
-        except:
-            return
+            teams_to_insert = [{
+                "team_id": team.get("team_id", None),
+                "team_name": team.get("team", None)
+            } for team in league_table]
+
+            data, _ = supabase.table("teams").upsert(teams_to_insert).execute()
+
+            print("League Found!")
+        except Exception as e:
+            print(f"\nTeams not found: {str(e)}\n\n")
 
     # ONE TIME USE
     @staticmethod
@@ -77,7 +83,7 @@ class SupabaseRoutes:
             }
                 for league in leagues]
 
-            data, _count = supabase.table('leagues').upsert(league_to_insert).execute()
+            data, _ = supabase.table('leagues').upsert(league_to_insert).execute()
 
             print("\nSuccessfully uploaded to Supabase\n\n")
         except Exception as e:

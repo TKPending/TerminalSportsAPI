@@ -1,6 +1,6 @@
 from api.clients import FootballClient
 from .football_utils import match_teams, print_league
-from utils import Response
+from api.routes import SupabaseRoutes
 
 
 user = None
@@ -51,7 +51,7 @@ def league_information():
 
         league_table: [{}] = FootballClient.league_table(league_id=rapid_league_id)
 
-        # Fill DB with team id for fixtures
+        SupabaseRoutes.fetch_populate_teams(league_table)
 
         print_league(league_table)
 
