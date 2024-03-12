@@ -1,10 +1,16 @@
 from utils.user_input_checks import UserInputChecks
 from database.messages import ClientText
+import time
 
 
 class CLIHandler:
     def __init__(self):
         pass
+
+    @staticmethod
+    def loading(value: str) -> None:
+        print(f"Loading {value}")
+        time.sleep(0.5)
 
     @staticmethod
     def get_username() -> str:
