@@ -1,6 +1,6 @@
 from api.clients import FootballClient
-from api.routes import SupabaseRoutes
-import time
+from .football_utils import match_teams, print_league
+from utils import Response
 
 
 user = None
@@ -32,11 +32,28 @@ def saved_settings():
 
 
 def league_information():
-    leagues: [{}] = user.rapid_leagues()
-    time.sleep(0.5)
-    SupabaseRoutes.fetch_populate_league(leagues)
+    while True:
+        print("Please enter the league and country:\n")
+        league: str = input("League: ").lower()
+        country: str = input("Country: ").lower()
 
-    return
+        if league == "" or country == "":
+            print("Can't find league without both League and Country\n")
+            continue
+
+        league_check: bool or {} = match_teams(league, country)
+
+        if not league_check:
+            print("Sorry! League doesn't exist or Currently unavailable")
+            return
+
+        rapid_league_id: int = league_check["league_id"]
+
+        league_table: [{}] = FootballClient.league_table(league_id=rapid_league_id)
+
+        # Fill DB with team id for fixtures
+
+        print_league(league_table)
 
 
 def team_information():

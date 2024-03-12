@@ -16,9 +16,14 @@ class ClientText:
 
     ENDPOINTS = {
         "leagues": {
-            "football": "https://api-football-v1.p.rapidapi.com/v3/leagues"
+            "football": "https://api-football-v1.p.rapidapi.com/v3/leagues",
+            "league_table": "https://api-football-v1.p.rapidapi.com/v3/standings",
         },
         "default_error": "Problem making API Call"
+    }
+
+    SUPABASE = {
+        "failed_call": "Failed request with Supabase."
     }
 
     MENU = {

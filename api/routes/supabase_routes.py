@@ -1,5 +1,6 @@
 from database import supabase
 from utils import Response
+from database import ClientText
 
 
 class SupabaseRoutes:
@@ -38,7 +39,36 @@ class SupabaseRoutes:
         return data
 
     @staticmethod
-    def fetch_populate_league(leagues: [{}]):
+    def load_leagues() -> [{}]:
+        try:
+            data, _ = supabase.table("leagues").select("*").execute()
+
+            return data
+        except Exception as e:
+            print(f"Error: {e}")
+            print(ClientText.SUPABASE["failed_call"])
+
+    @staticmethod
+    def load_specific_leagues(league: str):
+        try:
+            data, _ = supabase.table("leagues").select("*").eq("league_country", league).execute()
+
+            return data
+        except Exception as e:
+            print(f"Error: {e}")
+            print(ClientText.SUPABASE["failed_call"])
+
+
+    @staticmethod
+    def fetch_populate_teams(api_id: int, team_name: str):
+        try:
+            return
+        except:
+            return
+
+    # ONE TIME USE
+    @staticmethod
+    def fetch_populate_league(leagues: [{}]) -> None:
         try:
             league_to_insert = [{
                 "league_id": league.get('api_id', None),
