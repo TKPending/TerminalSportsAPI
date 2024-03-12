@@ -36,3 +36,19 @@ class SupabaseRoutes:
         data, _ = supabase.table("users").insert({"username": username, "password": password}).execute()
 
         return data
+
+    @staticmethod
+    def fetch_populate_league(leagues: [{}]):
+        try:
+            league_to_insert = [{
+                "league_id": league.get('api_id', None),
+                "league_name": league.get('league_name', None),
+                "league_country": league.get("league_country", None)
+            }
+                for league in leagues]
+
+            data, _count = supabase.table('leagues').upsert(league_to_insert).execute()
+
+            print("\nSuccessfully uploaded to Supabase\n\n")
+        except Exception as e:
+            print(f"\nUnsuccessfully uploading to Supabase. Error: {str(e)}\n\n")

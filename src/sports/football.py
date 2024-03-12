@@ -1,4 +1,7 @@
 from api.clients import FootballClient
+from api.routes import SupabaseRoutes
+import time
+
 
 user = None
 
@@ -30,8 +33,9 @@ def saved_settings():
 
 def league_information():
     leagues: [{}] = user.rapid_leagues()
+    time.sleep(0.5)
+    SupabaseRoutes.fetch_populate_league(leagues)
 
-    print(len(leagues))
     return
 
 
