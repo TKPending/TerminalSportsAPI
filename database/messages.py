@@ -17,7 +17,8 @@ class ClientText:
     ENDPOINTS = {
         "leagues": {
             "football": "https://api-football-v1.p.rapidapi.com/v3/leagues"
-        }
+        },
+        "default_error": "Problem making API Call"
     }
 
     MENU = {

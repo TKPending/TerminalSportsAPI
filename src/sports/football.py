@@ -29,7 +29,9 @@ def saved_settings():
 
 
 def league_information():
-    user.rapid_leagues()
+    leagues: [{}] = user.rapid_leagues()
+
+    print(len(leagues))
     return
 
 
