@@ -82,6 +82,30 @@ class FootballClient:
             if len(live_fixtures) == 0:
                 return False
 
+            live_matches = []
+            for matches in live_fixtures:
+                match_data = {
+                    "kick-off": matches['fixture']['timestamp'],
+                    "home": matches['teams']["home"]["name"],
+                    "home_score": matches["goals"]["home"],
+                    "time": matches['fixture']['status']["elapsed"],
+                    "away": matches['teams']["away"]["name"],
+                    "away_score": matches["goals"]["away"],
+                    "events": []
+                }
+
+                for event in matches['events']:
+                    if event["type"] == "Goal":
+                        event_data = {
+                            "elapsed": event['time']['elapsed'],
+                            "player_name": event['player']['name']
+                        }
+                        match_data['events'].append(event_data)
+
+                live_matches.append(match_data)
+
+            return live_matches
+
         except Exception as e:
             print("Problem making API Call:", str(e))
             return None

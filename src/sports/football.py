@@ -1,5 +1,5 @@
 from api.clients import FootballClient
-from .football_utils import match_teams, print_league, print_upcoming_fixtures
+from .football_utils import match_teams, print_league, print_upcoming_fixtures, print_live_fixtures
 from api.routes import SupabaseRoutes
 from utils import CLIHandler
 
@@ -80,6 +80,9 @@ def league_fixtures(league_id: int) -> None:
             if not live_fixtures:
                 print("\nThere are currently no live matches")
                 return False
+
+            print_live_fixtures(live_fixtures)
+            return
         elif fixture == "upcoming":
             upcoming_fixture = FootballClient.league_upcoming_fixtures(league_id)
 
