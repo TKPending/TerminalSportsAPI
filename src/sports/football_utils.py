@@ -1,6 +1,7 @@
 from api.routes import SupabaseRoutes
 from utils import CLIHandler
 from prettytable import PrettyTable
+from datetime import datetime
 
 
 def match_teams(league: str, country: str) -> bool:
@@ -36,6 +37,30 @@ def print_league(league_table: [{}]) -> None:
             team['gf'],
             team["gd"],
             team['performance']
+        ])
+
+    print(table)
+
+
+def print_upcoming_fixtures(upcoming_fixtures: [{}]) -> None:
+    if upcoming_fixtures is None:
+        print("Error retrieving fixture data")
+
+    table = PrettyTable()
+
+    table.field_names = ["Date", "Home", "vs", "Away", "Time"]
+
+    for fixture in upcoming_fixtures:
+        fixture_date = datetime.utcfromtimestamp(fixture['time'])
+        formatted_date = fixture_date.strftime('%d-%m-%Y')
+        formatted_time = fixture_date.strftime('%H:%M')
+
+        table.add_row([
+            formatted_date,
+            fixture['home'],
+            "vs",
+            fixture['away'],
+            formatted_time,
         ])
 
     print(table)

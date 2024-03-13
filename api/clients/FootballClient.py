@@ -1,9 +1,8 @@
-# from utils import Response, ErrorHandler
 from database import ClientText
 # from api.routes import SupabaseRoutes
 import requests
 from api import headers
-from datetime import datetime
+from datetime import datetime, timedelta
 
 
 class FootballClient:
@@ -66,6 +65,62 @@ class FootballClient:
                 team_details.append(team_info)
 
             return team_details
+        except Exception as e:
+            print("Problem making API Call:", str(e))
+            return None
+
+    # TODO: Need to create this when there is a live fixture
+    @staticmethod
+    def league_live_fixtures(league_id: int):
+        try:
+            live_params: {} = {'live': 'all', 'league': league_id}
+
+            response = requests.get(ClientText.ENDPOINTS["leagues"]["fixtures"], headers=headers, params=live_params)
+            data: {} = response.json()
+            live_fixtures: {} = data["response"]
+
+            if len(live_fixtures) == 0:
+                return False
+
+        except Exception as e:
+            print("Problem making API Call:", str(e))
+            return None
+
+    @staticmethod
+    def league_upcoming_fixtures(league_id: int):
+        try:
+            current_date = datetime.now().date()
+            next_7_days = [current_date + timedelta(days=i) for i in range(7)]
+            current_year = datetime.now().year - 1
+            end_date = next_7_days[-1]
+            upcoming_params = {
+                "league": league_id,
+                "season": current_year,
+                "from": current_date.strftime('%Y-%m-%d'),
+                "to": end_date.strftime('%Y-%m-%d'),
+                "timezone": "Europe/London"
+            }
+
+            response = requests.get(
+                ClientText.ENDPOINTS["leagues"]["fixtures"], headers=headers, params=upcoming_params
+            )
+
+            data: {} = response.json()
+            fixtures_data: {} = data["response"]
+            upcoming_fixtures = []
+
+            for fixture in fixtures_data:
+                fixture_info = {
+                    'date': fixture['fixture']["date"],
+                    "home": fixture['teams']['home']['name'],
+                    "away": fixture['teams']['away']['name'],
+                    "time": fixture['fixture']['timestamp'],
+                }
+
+                upcoming_fixtures.append(fixture_info)
+
+            return upcoming_fixtures
+
         except Exception as e:
             print("Problem making API Call:", str(e))
             return None

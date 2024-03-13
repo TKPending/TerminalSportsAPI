@@ -12,12 +12,14 @@ class ClientText:
             "success": "\nYour account has been created!",
             "failure": "\nFailure creating account. Try again!\n"
         },
+        "close": "\nThank you for using Terminal Sports!'n"
     }
 
     ENDPOINTS = {
         "leagues": {
             "football": "https://api-football-v1.p.rapidapi.com/v3/leagues",
             "league_table": "https://api-football-v1.p.rapidapi.com/v3/standings",
+            "fixtures": "https://api-football-v1.p.rapidapi.com/v3/fixtures",
         },
         "default_error": "Problem making API Call"
     }

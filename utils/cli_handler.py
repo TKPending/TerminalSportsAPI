@@ -1,6 +1,7 @@
 from utils.user_input_checks import UserInputChecks
 from database.messages import ClientText
 import time
+import sys
 
 
 class CLIHandler:
@@ -67,3 +68,8 @@ class CLIHandler:
 
         user_input_check: bool = UserInputChecks.input_affirmation(input_value=user_input)
         return user_input_check
+
+    @staticmethod
+    def close_program() -> None:
+        print(ClientText.INTRODUCTION["close"])
+        sys.exit()
